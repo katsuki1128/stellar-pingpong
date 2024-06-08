@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>福岡上空のみちびき衛星の次の通過</title>
+</head>
+
+<body>
+    <h1>福岡上空のみちびき衛星の次の通過</h1>
+    <script type="application/json" id="events-data">
+        {{ events_info | tojson }}
+    </script>
+    <ul>
+        {% for event in events_info %}
+        <li>
+            {{ event.satellite }}が福岡上空を通過するのは
+            <span id="countdown-{{ loop.index0 }}"></span>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>
