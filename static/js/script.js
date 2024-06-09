@@ -69,18 +69,27 @@ window.onresize = () => {
     fukuokaMarker.style.left = `${window.innerWidth * 0.8}px`;
 };
 
-// 加速度センサーのデータを利用して画像の位置を変更
 if (window.DeviceMotionEvent) {
     window.addEventListener('devicemotion', function (event) {
-        const acceleration = event.accelerationIncludingGravity;
-        const satelliteWrapper = document.querySelector('.satellite-wrapper');
-
-        // 簡単な例として、加速度センサーのデータを画像の位置に反映
-        const xPos = (window.innerWidth / 2) + acceleration.x * 10; // スケール調整
-        const yPos = (window.innerHeight / 2) + acceleration.y * 10; // スケール調整
-
-        satelliteWrapper.style.transform = `translate(${xPos}px, ${yPos}px)`;
+        const acceleration = event.acceleration;
+        document.getElementById('acceleration').textContent = `X: ${acceleration.x.toFixed(2)}, Y: ${acceleration.y.toFixed(2)}, Z: ${acceleration.z.toFixed(2)}`;
     }, true);
 } else {
-    console.log("DeviceMotionEvent is not supported on your device.");
+    document.getElementById('acceleration').textContent = "DeviceMotionEvent is not supported on your device.";
 }
+
+// 加速度センサーのデータを利用して画像の位置を変更
+// if (window.DeviceMotionEvent) {
+//     window.addEventListener('devicemotion', function (event) {
+//         const acceleration = event.accelerationIncludingGravity;
+//         const satelliteWrapper = document.querySelector('.satellite-wrapper');
+
+//         // 簡単な例として、加速度センサーのデータを画像の位置に反映
+//         const xPos = (window.innerWidth / 2) + acceleration.x * 10; // スケール調整
+//         const yPos = (window.innerHeight / 2) + acceleration.y * 10; // スケール調整
+
+//         satelliteWrapper.style.transform = `translate(${xPos}px, ${yPos}px)`;
+//     }, true);
+// } else {
+//     console.log("DeviceMotionEvent is not supported on your device.");
+// }
