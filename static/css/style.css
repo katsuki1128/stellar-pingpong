@@ -81,7 +81,7 @@ button {
     font-size: 24px;
     color: red;
 }
-/* 
+
 #ball {
     position: absolute;
     bottom: 0;
@@ -89,7 +89,7 @@ button {
     transform: translateX(-50%);
     font-size: 24px;
     display: none;
-} */
+}
 
 canvas {
     position: absolute;
