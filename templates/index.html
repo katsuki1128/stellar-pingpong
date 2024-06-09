@@ -11,25 +11,37 @@
 <body>
     <h1>福岡上空のみちびき衛星の次の通過</h1>
 
-    <!-- みちびき衛星の画像 -->
-    {% for event in events_info %}
-    <img src="{{ url_for('static', filename='img/' ~ event.satellite | lower ~ '.png') }}"
-        id="satellite-img-{{ loop.index0 }}" class="satellite-img" alt="{{ event.satellite }}">
-    {% endfor %}
 
-    <script type="application/json" id="events-data">
+    <div>
+        <!-- スライダー -->
+        <label for="time-range">表示範囲 (時間):</label>
+        <input type="range" id="time-range" name="time-range" min="6" max="20" value="20"
+            oninput="updateRangeValue(this.value)">
+        <span id="range-value">20</span>時間
+    </div>
+
+    <div class="satellite-container">
+        <!-- みちびき衛星の画像 -->
+        {% for event in events_info %}
+        <img src="{{ url_for('static', filename='img/' ~ event.satellite | lower ~ '.png') }}"
+            id="satellite-img-{{ loop.index0 }}" class="satellite-img" alt="{{ event.satellite }}">
+        {% endfor %}
+
+    </div>
+    <div>
+        <script type="application/json" id="events-data">
         {{ events_info | tojson }}
     </script>
-    <ul>
-        {% for event in events_info %}
-        <li>
-            {{ event.satellite }}が福岡を通過するのは
-            <span id="countdown-{{ loop.index0 }}"></span>
-        </li>
-        {% endfor %}
-    </ul>
+        <ul>
+            {% for event in events_info %}
+            <li>
+                {{ event.satellite }}が福岡を通過するのは
+                <span id="countdown-{{ loop.index0 }}"></span>
+            </li>
+            {% endfor %}
+        </ul>
 
-
+    </div>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>

@@ -1,8 +1,28 @@
-/* 画像の初期スタイル */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    margin: 20px 0;
+}
+
+div {
+    margin: 10px 0;
+}
+
+.satellite-container {
+    position: relative;
+    width: 100%;
+    height: 100px; /* 必要に応じて高さを調整 */
+}
+
 .satellite-img {
     position: absolute;
     top: 10px;
-    left: 10px;
     width: 30px;
     height: 30px;
     /* スムーズな移動 */
