@@ -91,9 +91,9 @@ const deviceMotionRequest = () => {
                         } else {
                             document.getElementById('message').textContent = "";
                         }
-                        // document.getElementById('x').innerHTML = event.accelerationIncludingGravity.x.toFixed(2);
-                        // document.getElementById('y').innerHTML = event.accelerationIncludingGravity.y.toFixed(2);
-                        // document.getElementById('z').innerHTML = event.accelerationIncludingGravity.z.toFixed(2);
+                        document.getElementById('x').innerHTML = event.accelerationIncludingGravity.x.toFixed(2);
+                        document.getElementById('y').innerHTML = event.accelerationIncludingGravity.y.toFixed(2);
+                        document.getElementById('z').innerHTML = event.accelerationIncludingGravity.z.toFixed(2);
                     });
                 }
             })
