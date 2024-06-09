@@ -52,6 +52,15 @@
         </ul> -->
     </div>
 
+    <div>
+        <button onClick="deviceMotionRequest()">加速度センサーを有効にする</button>
+    </div>
+    <div class="sensor-data">
+        X: <span id="x">0</span><br>
+        Y: <span id="y">0</span><br>
+        Z: <span id="z">0</span>
+    </div>
+
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 

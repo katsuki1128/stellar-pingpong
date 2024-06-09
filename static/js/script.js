@@ -51,7 +51,6 @@ const updateCountdown = () => {
     const fukuokaMarker = document.querySelector('.fukuoka-marker');
     fukuokaMarker.style.left = `${window.innerWidth * 0.8}px`;
 
-
 };
 
 setInterval(updateCountdown, 1000);
@@ -67,4 +66,26 @@ window.onresize = () => {
     // 福岡マーカーの位置を設定
     const fukuokaMarker = document.querySelector('.fukuoka-marker');
     fukuokaMarker.style.left = `${window.innerWidth * 0.8}px`;
+};
+
+const deviceMotionRequest = () => {
+    if (typeof DeviceMotionEvent.requestPermission === 'function') {
+        DeviceMotionEvent.requestPermission()
+            .then(permissionState => {
+                if (permissionState === 'granted') {
+                    window.addEventListener("devicemotion", (event) => {
+                        if (!event.accelerationIncludingGravity) {
+                            alert('event.accelerationIncludingGravity is null');
+                            return;
+                        }
+                        document.getElementById('x').innerHTML = event.accelerationIncludingGravity.x.toFixed(2);
+                        document.getElementById('y').innerHTML = event.accelerationIncludingGravity.y.toFixed(2);
+                        document.getElementById('z').innerHTML = event.accelerationIncludingGravity.z.toFixed(2);
+                    });
+                }
+            })
+            .catch(console.error);
+    } else {
+        alert('DeviceMotionEvent.requestPermission is not found');
+    }
 };

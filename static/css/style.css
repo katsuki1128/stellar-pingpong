@@ -64,3 +64,14 @@ div {
     font-size: 14px; /* 必要に応じてサイズを調整 */
     text-align: center; /* 中央揃え */
 }
+
+.sensor-data {
+    margin: 20px;
+    font-size: 24px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+}
