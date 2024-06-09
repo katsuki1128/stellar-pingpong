@@ -22,21 +22,25 @@ const updateCountdown = () => {
         const eventTime = new Date(event.time).getTime();
         const distance = eventTime - now;
 
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
+        // const milliseconds = Math.floor(distance % 1000 / 10).toString().padStart(2, '0');  // ミリ秒の上2桁
+
 
         const countdownElement = document.getElementById(`countdown-${index}`);
-        countdownElement.innerHTML = `${days}日 ${hours}時間 ${minutes}分 ${seconds}秒`;
+        countdownElement.innerHTML = `${hours}:${minutes}:${seconds}`;
 
         // 移動範囲を設定 (例として、0から80%の範囲で移動)
         // const totalDistance = 1000 * 60 * 60 * 20; // 20時間をミリ秒に変換
         const maxLeft = window.innerWidth * 0.8; // 80%の範囲で移動
-        const leftPosition = Math.max(0, Math.min(maxLeft, maxLeft * (1 - distance / maxDistance)));
+        // const leftPosition = Math.max(0, Math.min(maxLeft, maxLeft * (1 - distance / maxDistance)));
+        const rightPosition = Math.max(0, Math.min(maxLeft, maxLeft * (1 - distance / maxDistance)));
 
-        const satelliteImg = document.getElementById(`satellite-img-${index}`);
-        satelliteImg.style.left = `${leftPosition}px`;
+        const satelliteWrapper = document.getElementById(`satellite-wrapper-${index}`);
+        // satelliteWrapper.style.left = `${leftPosition}px`;
+        satelliteWrapper.style.right = `${rightPosition}px`;
 
         if (distance < 0) {
             countdownElement.innerHTML = "通過済み";

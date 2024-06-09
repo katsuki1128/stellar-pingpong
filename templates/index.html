@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>福岡上空のみちびき衛星の次の通過</title>
+
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
@@ -23,8 +24,12 @@
     <div class="satellite-container">
         <!-- みちびき衛星の画像 -->
         {% for event in events_info %}
-        <img src="{{ url_for('static', filename='img/' ~ event.satellite | lower ~ '.png') }}"
-            id="satellite-img-{{ loop.index0 }}" class="satellite-img" alt="{{ event.satellite }}">
+        <div class="satellite-wrapper" id="satellite-wrapper-{{ loop.index0 }}">
+            <span class="satellite-name">{{ event.satellite }}</span>
+            <span id="countdown-{{ loop.index0 }}" class="countdown"></span>
+            <img src="{{ url_for('static', filename='img/' ~ event.satellite | lower ~ '.png') }}"
+                id="satellite-img-{{ loop.index0 }}" class="satellite-img" alt="{{ event.satellite }}">
+        </div>
         {% endfor %}
     </div>
 
@@ -33,17 +38,16 @@
     </div>
     <div>
         <script type="application/json" id="events-data">
-        {{ events_info | tojson }}
-    </script>
-        <ul>
+            {{ events_info | tojson }}
+        </script>
+        <!-- <ul>
             {% for event in events_info %}
             <li>
-                {{ event.satellite }}が福岡を通過するのは
+                {{ event.satellite }}
                 <span id="countdown-{{ loop.index0 }}"></span>
             </li>
             {% endfor %}
-        </ul>
-
+        </ul> -->
     </div>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>

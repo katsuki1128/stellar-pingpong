@@ -12,8 +12,11 @@ def index():
     # 福岡の緯度経度
     fukuoka = Topos(latitude_degrees=33.5902, longitude_degrees=130.4017)
 
+    # TLEをローカルファイルから読み込む
+    tle_file_path = "gnss.txt"
+    sats = load.tle_file(tle_file_path)
     # TLEを読み込む
-    sats = load.tle_file("https://celestrak.org/NORAD/elements/gnss.txt", reload=True)
+    # sats = load.tle_file("https://celestrak.org/NORAD/elements/gnss.txt", reload=True)
     ts = load.timescale()
 
     # みちびき衛星のリスト
