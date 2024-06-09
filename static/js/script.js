@@ -68,6 +68,8 @@ window.onresize = () => {
     fukuokaMarker.style.left = `${window.innerWidth * 0.8}px`;
 };
 
+const threshold = 15; // 閾値 (加速度の変化の大きさ)
+
 const deviceMotionRequest = () => {
     if (typeof DeviceMotionEvent.requestPermission === 'function') {
         DeviceMotionEvent.requestPermission()
@@ -78,9 +80,20 @@ const deviceMotionRequest = () => {
                             alert('event.accelerationIncludingGravity is null');
                             return;
                         }
-                        document.getElementById('x').innerHTML = event.accelerationIncludingGravity.x.toFixed(2);
-                        document.getElementById('y').innerHTML = event.accelerationIncludingGravity.y.toFixed(2);
-                        document.getElementById('z').innerHTML = event.accelerationIncludingGravity.z.toFixed(2);
+                        const x = event.accelerationIncludingGravity.x.toFixed(2);
+                        const y = event.accelerationIncludingGravity.y.toFixed(2);
+                        const z = event.accelerationIncludingGravity.z.toFixed(2);
+
+                        const accelerationMagnitude = Math.sqrt(x * x + y * y + z * z);
+
+                        if (accelerationMagnitude > threshold) {
+                            document.getElementById('message').textContent = "ラケットが振られました";
+                        } else {
+                            document.getElementById('message').textContent = "";
+                        }
+                        // document.getElementById('x').innerHTML = event.accelerationIncludingGravity.x.toFixed(2);
+                        // document.getElementById('y').innerHTML = event.accelerationIncludingGravity.y.toFixed(2);
+                        // document.getElementById('z').innerHTML = event.accelerationIncludingGravity.z.toFixed(2);
                     });
                 }
             })
