@@ -89,6 +89,7 @@ const deviceMotionRequest = () => {
 
                         if (accelerationMagnitude > threshold) {
                             document.getElementById('message').textContent = "ラケットが振られました";
+                            triggerBallAnimation();
                         } else {
                             document.getElementById('message').textContent = "";
                         }
