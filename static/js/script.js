@@ -122,12 +122,12 @@ const triggerBallAnimation = () => {
     });
     let animationId;
     const drawBall = () => {
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        context.beginPath();
-        context.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
-        context.fillStyle = "#000";
-        context.fill();
-        context.closePath();
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.beginPath();
+        ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+        ctx.fillStyle = "#000";
+        ctx.fill();
+        ctx.closePath();
     };
 
     const animateBall = () => {
@@ -136,6 +136,15 @@ const triggerBallAnimation = () => {
         if (ball.y < 0 || ball.y > canvas.height) {
             ballDirection *= -1; // ボールの方向を逆にする
         }
+
+        // 衛星との衝突判定
+        satellites.forEach(satellite => {
+            const rect = satellite.getBoundingClientRect();
+            if (ball.x > rect.left && ball.x < rect.right && ball.y > rect.top && ball.y < rect.bottom) {
+                ballDirection *= -1; // ボールの方向を逆にする
+            }
+        });
+
         drawBall();
         animationId = requestAnimationFrame(animateBall);
     };
