@@ -17,7 +17,7 @@ div {
 .satellite-container {
     position: relative;
     width: 100%;
-    height: 100px; /* 必要に応じて高さを調整 */
+    height: 50px; /* 必要に応じて高さを調整 */
     margin-bottom: 20px;
 
 }
@@ -28,7 +28,7 @@ div {
     flex-direction: column;
     align-items: center;
     /* スムーズな移動 */
-    transition: right 1s linear;
+    transition: left 1s linear;
 }
 
 .satellite-img {
@@ -45,7 +45,7 @@ div {
     top: -20px; /* カウントダウンタイマーの上に表示 */
     font-size: 8px; /* フォントサイズを調整 */
     text-align: center;
-    width: 100%;
+    width: 40px;
 }
 
 .countdown {
@@ -58,7 +58,7 @@ div {
 
 .fukuoka-marker {
     position: absolute;
-    top: 180px; /* 画像の下 */
+    top: 200px; /* 画像の下 */
     left: 80%; /* デフォルト位置 */
     transform: translateX(-50%);
     font-size: 14px; /* 必要に応じてサイズを調整 */

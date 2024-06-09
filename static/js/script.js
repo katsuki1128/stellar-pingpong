@@ -35,12 +35,12 @@ const updateCountdown = () => {
         // 移動範囲を設定 (例として、0から80%の範囲で移動)
         // const totalDistance = 1000 * 60 * 60 * 20; // 20時間をミリ秒に変換
         const maxLeft = window.innerWidth * 0.8; // 80%の範囲で移動
-        // const leftPosition = Math.max(0, Math.min(maxLeft, maxLeft * (1 - distance / maxDistance)));
-        const rightPosition = Math.max(0, Math.min(maxLeft, maxLeft * (1 - distance / maxDistance)));
+        const leftPosition = Math.max(0, Math.min(maxLeft, maxLeft * (1 - distance / maxDistance)));
+        // const rightPosition = Math.max(0, Math.min(maxLeft, maxLeft * (1 - distance / maxDistance)));
 
         const satelliteWrapper = document.getElementById(`satellite-wrapper-${index}`);
-        // satelliteWrapper.style.left = `${leftPosition}px`;
-        satelliteWrapper.style.right = `${rightPosition}px`;
+        satelliteWrapper.style.left = `${leftPosition}px`;
+        // satelliteWrapper.style.right = `${rightPosition}px`;
 
         if (distance < 0) {
             countdownElement.innerHTML = "通過済み";
@@ -68,57 +68,3 @@ window.onresize = () => {
     const fukuokaMarker = document.querySelector('.fukuoka-marker');
     fukuokaMarker.style.left = `${window.innerWidth * 0.8}px`;
 };
-if (window.DeviceMotionEvent) {
-    // iOS 13+の許可リクエスト
-    if (typeof DeviceMotionEvent.requestPermission === 'function') {
-        DeviceMotionEvent.requestPermission()
-            .then(permissionState => {
-                if (permissionState === 'granted') {
-                    window.addEventListener('devicemotion', function (event) {
-                        const acceleration = event.acceleration;
-                        document.getElementById('acceleration').textContent = `X: ${acceleration.x.toFixed(2)}, Y: ${acceleration.y.toFixed(2)}, Z: ${acceleration.z.toFixed(2)}`;
-                    }, true);
-                } else {
-                    document.getElementById('acceleration').textContent = "DeviceMotionEvent permission denied.";
-                }
-            })
-            .catch(console.error);
-    } else {
-        // 許可リクエストが不要な場合
-        window.addEventListener('devicemotion', function (event) {
-            const acceleration = event.acceleration;
-            document.getElementById('acceleration').textContent = `X: ${acceleration.x.toFixed(2)}, Y: ${acceleration.y.toFixed(2)}, Z: ${acceleration.z.toFixed(2)}`;
-        }, true);
-    }
-} else {
-    document.getElementById('acceleration').textContent = "DeviceMotionEvent is not supported on your device.";
-}
-
-
-
-// if (window.DeviceMotionEvent) {
-//     window.addEventListener('devicemotion', function (event) {
-//         const acceleration = event.acceleration;
-//         document.getElementById('acceleration').textContent = `X: ${acceleration.x.toFixed(2)}, Y: ${acceleration.y.toFixed(2)}, Z: ${acceleration.z.toFixed(2)}`;
-//     }, true);
-// } else {
-//     document.getElementById('acceleration').textContent = "DeviceMotionEvent is not supported on your device.";
-// }
-
-
-
-// 加速度センサーのデータを利用して画像の位置を変更
-// if (window.DeviceMotionEvent) {
-//     window.addEventListener('devicemotion', function (event) {
-//         const acceleration = event.accelerationIncludingGravity;
-//         const satelliteWrapper = document.querySelector('.satellite-wrapper');
-
-//         // 簡単な例として、加速度センサーのデータを画像の位置に反映
-//         const xPos = (window.innerWidth / 2) + acceleration.x * 10; // スケール調整
-//         const yPos = (window.innerHeight / 2) + acceleration.y * 10; // スケール調整
-
-//         satelliteWrapper.style.transform = `translate(${xPos}px, ${yPos}px)`;
-//     }, true);
-// } else {
-//     console.log("DeviceMotionEvent is not supported on your device.");
-// }
