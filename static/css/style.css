@@ -70,13 +70,6 @@ div {
     font-size: 24px;
 }
 
-button {
-    padding: 10px 20px;
-    font-size: 18px;
-    cursor: pointer;
-    z-index: 10; /* buttonを最前面に表示 */
-    
-}
 
 #message {
     margin-top: 20px;
@@ -91,6 +84,14 @@ button {
     transform: translateX(-50%);
     font-size: 24px;
     display: none;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 10; /* buttonを最前面に表示 */
+    position: relative;
 }
 
 canvas {
