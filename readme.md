@@ -1,7 +1,7 @@
 # 参考
-
 🔽人工衛星の軌道をPythonでアニメーションにしてみよう
 https://qiita.com/ciscorn/items/80b3a3f526316f78b24a
+
 
 # herokuデプロイ参考
 🔽herokuを使ってPythonのflaskで作ったアプリケーションをデプロイする方法と注意点！

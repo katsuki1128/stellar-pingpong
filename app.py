@@ -50,12 +50,6 @@ def index():
     # ソートして最も近いイベントを先に表示
     events_info.sort(key=lambda x: x["time"])
 
-    # events_infoをわかりやすくフォーマットしてプリント
-    # for event in events_info:
-    #     print(
-    #         f"衛星: {event['satellite']}, 通過時刻: {event['time'].strftime('%Y-%m-%d %H:%M:%S')} UTC"
-    #     )
-
     return render_template("index.html", events_info=events_info)
 
 

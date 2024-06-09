@@ -1,0 +1,10 @@
+/* 画像の初期スタイル */
+.satellite-img {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 30px;
+    height: 30px;
+    /* スムーズな移動 */
+    transition: left 1s linear;
+}

@@ -5,10 +5,18 @@
 <head>
     <meta charset="UTF-8">
     <title>福岡上空のみちびき衛星の次の通過</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
 <body>
     <h1>福岡上空のみちびき衛星の次の通過</h1>
+
+    <!-- みちびき衛星の画像 -->
+    {% for event in events_info %}
+    <img src="{{ url_for('static', filename='img/' ~ event.satellite | lower ~ '.png') }}"
+        id="satellite-img-{{ loop.index0 }}" class="satellite-img" alt="{{ event.satellite }}">
+    {% endfor %}
+
     <script type="application/json" id="events-data">
         {{ events_info | tojson }}
     </script>
@@ -20,6 +28,8 @@
         </li>
         {% endfor %}
     </ul>
+
+
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
