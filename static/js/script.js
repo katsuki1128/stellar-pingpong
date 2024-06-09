@@ -68,15 +68,44 @@ window.onresize = () => {
     const fukuokaMarker = document.querySelector('.fukuoka-marker');
     fukuokaMarker.style.left = `${window.innerWidth * 0.8}px`;
 };
-
 if (window.DeviceMotionEvent) {
-    window.addEventListener('devicemotion', function (event) {
-        const acceleration = event.acceleration;
-        document.getElementById('acceleration').textContent = `X: ${acceleration.x.toFixed(2)}, Y: ${acceleration.y.toFixed(2)}, Z: ${acceleration.z.toFixed(2)}`;
-    }, true);
+    // iOS 13+の許可リクエスト
+    if (typeof DeviceMotionEvent.requestPermission === 'function') {
+        DeviceMotionEvent.requestPermission()
+            .then(permissionState => {
+                if (permissionState === 'granted') {
+                    window.addEventListener('devicemotion', function (event) {
+                        const acceleration = event.acceleration;
+                        document.getElementById('acceleration').textContent = `X: ${acceleration.x.toFixed(2)}, Y: ${acceleration.y.toFixed(2)}, Z: ${acceleration.z.toFixed(2)}`;
+                    }, true);
+                } else {
+                    document.getElementById('acceleration').textContent = "DeviceMotionEvent permission denied.";
+                }
+            })
+            .catch(console.error);
+    } else {
+        // 許可リクエストが不要な場合
+        window.addEventListener('devicemotion', function (event) {
+            const acceleration = event.acceleration;
+            document.getElementById('acceleration').textContent = `X: ${acceleration.x.toFixed(2)}, Y: ${acceleration.y.toFixed(2)}, Z: ${acceleration.z.toFixed(2)}`;
+        }, true);
+    }
 } else {
     document.getElementById('acceleration').textContent = "DeviceMotionEvent is not supported on your device.";
 }
+
+
+
+// if (window.DeviceMotionEvent) {
+//     window.addEventListener('devicemotion', function (event) {
+//         const acceleration = event.acceleration;
+//         document.getElementById('acceleration').textContent = `X: ${acceleration.x.toFixed(2)}, Y: ${acceleration.y.toFixed(2)}, Z: ${acceleration.z.toFixed(2)}`;
+//     }, true);
+// } else {
+//     document.getElementById('acceleration').textContent = "DeviceMotionEvent is not supported on your device.";
+// }
+
+
 
 // 加速度センサーのデータを利用して画像の位置を変更
 // if (window.DeviceMotionEvent) {
