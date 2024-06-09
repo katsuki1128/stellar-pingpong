@@ -42,6 +42,25 @@ const updateCountdown = () => {
             countdownElement.innerHTML = "通過済み";
         }
     });
+
+    // 福岡マーカーの位置を設定
+    const fukuokaMarker = document.querySelector('.fukuoka-marker');
+    fukuokaMarker.style.left = `${window.innerWidth * 0.8}px`;
+
+
 };
 
 setInterval(updateCountdown, 1000);
+
+window.onload = () => {
+    updateCountdown();
+    // 福岡マーカーの位置を設定
+    const fukuokaMarker = document.querySelector('.fukuoka-marker');
+    fukuokaMarker.style.left = `${window.innerWidth * 0.8}px`;
+};
+
+window.onresize = () => {
+    // 福岡マーカーの位置を設定
+    const fukuokaMarker = document.querySelector('.fukuoka-marker');
+    fukuokaMarker.style.left = `${window.innerWidth * 0.8}px`;
+};

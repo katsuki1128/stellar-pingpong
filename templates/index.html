@@ -26,7 +26,10 @@
         <img src="{{ url_for('static', filename='img/' ~ event.satellite | lower ~ '.png') }}"
             id="satellite-img-{{ loop.index0 }}" class="satellite-img" alt="{{ event.satellite }}">
         {% endfor %}
+    </div>
 
+    <div class="fukuoka-marker">
+        ▲福岡
     </div>
     <div>
         <script type="application/json" id="events-data">

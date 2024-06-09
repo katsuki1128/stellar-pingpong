@@ -28,3 +28,12 @@ div {
     /* スムーズな移動 */
     transition: left 1s linear;
 }
+
+.fukuoka-marker {
+    position: absolute;
+    top: 180px; /* 画像の下 */
+    left: 80%; /* デフォルト位置 */
+    transform: translateX(-50%);
+    font-size: 14px; /* 必要に応じてサイズを調整 */
+    text-align: center; /* 中央揃え */
+}
