@@ -105,10 +105,9 @@ const deviceMotionRequest = () => {
     }
 };
 
-
-
 const triggerBallAnimation = () => {
-    const ball = document.getElementById('ball');
+    const canvas = document.getElementById('animationCanvas');
+    const ctx = canvas.getContext('2d');
     const satellites = document.querySelectorAll('.satellite-wrapper');
     let targetX = 0;
 
@@ -119,12 +118,56 @@ const triggerBallAnimation = () => {
         }
     });
 
-    ball.style.display = 'block';
-    ball.style.transition = 'left 1s, top 1s';
-    ball.style.left = `${targetX}px`;
-    ball.style.top = '0';
+    const startX = canvas.width / 2;
+    const startY = canvas.height;
+    const endX = targetX;
+    const endY = 0;
+    const duration = 1000;
+    const startTime = Date.now();
 
-    setTimeout(() => {
-        ball.style.display = 'none';
-    }, 1000);
+    const animate = () => {
+        const currentTime = Date.now();
+        const elapsedTime = currentTime - startTime;
+        const t = Math.min(elapsedTime / duration, 1);
+
+        const x = startX + (endX - startX) * t;
+        const y = startY + (endY - startY) * t;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.beginPath();
+        ctx.arc(x, y, 10, 0, Math.PI * 2);
+        ctx.fillStyle = 'black';
+        ctx.fill();
+
+        if (t < 1) {
+            requestAnimationFrame(animate);
+        }
+    };
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    animate();
 };
+
+// const triggerBallAnimation = () => {
+//     const ball = document.getElementById('ball');
+//     const satellites = document.querySelectorAll('.satellite-wrapper');
+//     let targetX = 0;
+
+//     satellites.forEach(satellite => {
+//         const rect = satellite.getBoundingClientRect();
+//         if (rect.right > targetX) {
+//             targetX = rect.right;
+//         }
+//     });
+
+//     ball.style.display = 'block';
+//     ball.style.transition = 'left 1s, top 1s';
+//     ball.style.left = `${targetX}px`;
+//     ball.style.top = '0';
+
+//     setTimeout(() => {
+//         ball.style.display = 'none';
+//     }, 1000);
+// };
