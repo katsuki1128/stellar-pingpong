@@ -105,6 +105,10 @@ const deviceMotionRequest = () => {
     }
 };
 
+
+let ballDirectionY = -1; // ボールのy方向の初期方向
+let ballDirectionX = 1; // ボールのx方向の初期方向
+
 const triggerBallAnimation = () => {
     const canvas = document.getElementById('animationCanvas');
     const ctx = canvas.getContext('2d');
