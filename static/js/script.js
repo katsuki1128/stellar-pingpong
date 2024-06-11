@@ -111,6 +111,8 @@ let ballDirectionX = 1; // ボールのx方向の初期方向
 
 const triggerBallAnimation = () => {
     const canvas = document.getElementById('animationCanvas');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
     const ctx = canvas.getContext('2d');
     const ball = { x: canvas.width / 2, y: canvas.height, radius: 10 };
     const satellites = document.querySelectorAll('.satellite-wrapper');
