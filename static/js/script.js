@@ -134,13 +134,17 @@ const triggerBallAnimation = () => {
     };
 
     const animateBall = () => {
-        ball.y -= 5 * ballDirectionY;
+        ball.y += 5 * ballDirectionY;
         ball.x += 5 * ballDirectionX;
 
         // 衛星との衝突判定
         satellites.forEach(satellite => {
             const rect = satellite.getBoundingClientRect();
-            if (ball.x > rect.left && ball.x < rect.right && ball.y > rect.top && ball.y < rect.bottom) {
+            const satelliteLeft = rect.left + window.scrollX;
+            const satelliteRight = rect.right + window.scrollX;
+            const satelliteTop = rect.top + window.scrollY;
+            const satelliteBottom = rect.bottom + window.scrollY;
+            if (ball.x > satelliteLeft && ball.x < satelliteRight && ball.y > satelliteTop && ball.y < satelliteBottom) {
                 ballDirectionY *= -1; // ボールのy方向を逆にする
             }
         });
