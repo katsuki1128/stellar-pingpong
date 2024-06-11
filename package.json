@@ -1,0 +1,16 @@
+{
+  "name": "stellar_pingpong",
+  "version": "1.0.0",
+  "description": "Stellar Ping Pong project https://stellar-pingpong-6c9bb9054063.herokuapp.com/",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "tailwindcss build static/css/styles.css -o static/css/tailwind.css"
+  },
+  "keywords": [],
+  "author": "Kouichi Katsuki",
+  "license": "ISC",
+  "dependencies": {
+    "tailwindcss": "^3.4.4"
+  }
+}
