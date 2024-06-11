@@ -87,6 +87,14 @@ div {
     display: none;
 }
 
+#slider-container {
+    position: relative;
+    z-index: 5; /* canvasより上に表示されるように設定 */
+    background: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
 button {
     padding: 10px 20px;
     font-size: 18px;
