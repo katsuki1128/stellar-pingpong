@@ -67,7 +67,7 @@ div {
 }
 .sensor-data {
     position: absolute;
-    bottom: 10px;
+    bottom: 20px;
     left: 10px;
     font-size: 12px;
     margin: 0;
@@ -104,7 +104,7 @@ div {
 .button-container {
     position: absolute;
     bottom: 10px;
-    left: 50px;
+    left: 100px;
     display: flex;
     flex-direction: column;
     gap: 10px;
