@@ -118,37 +118,78 @@ const triggerBallAnimation = () => {
         }
     });
 
-    const startX = canvas.width / 2;
-    const startY = canvas.height;
-    const endX = targetX;
-    const endY = 0;
-    const duration = 1000;
-    const startTime = Date.now();
-
-    const animate = () => {
-        const currentTime = Date.now();
-        const elapsedTime = currentTime - startTime;
-        const t = Math.min(elapsedTime / duration, 1);
-
-        const x = startX + (endX - startX) * t;
-        const y = startY + (endY - startY) * t;
-
+    let animationId;
+    const drawBall = () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.beginPath();
-        ctx.arc(x, y, 10, 0, Math.PI * 2);
-        ctx.fillStyle = 'black';
+        ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+        ctx.fillStyle = "#000";
         ctx.fill();
-
-        if (t < 1) {
-            requestAnimationFrame(animate);
-        }
+        ctx.closePath();
     };
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    animate();
+    const animateBall = () => {
+        ball.y -= 5 * ballDirectionY;
+        ball.x += 5 * ballDirectionX;
+
+        // 衛星との衝突判定
+        satellites.forEach(satellite => {
+            const rect = satellite.getBoundingClientRect();
+            if (ball.x > rect.left && ball.x < rect.right && ball.y > rect.top && ball.y < rect.bottom) {
+                ballDirectionY *= -1; // ボールのy方向を逆にする
+            }
+        });
+
+        // キャンバスの端に当たったら跳ね返る
+        if (ball.y < 0 || ball.y > canvas.height) {
+            ballDirectionY *= -1;
+        }
+        if (ball.x < 0 || ball.x > canvas.width) {
+            ballDirectionX *= -1;
+        }
+
+        drawBall();
+        animationId = requestAnimationFrame(animateBall);
+    };
+
+    ball.x = canvas.width / 2;
+    ball.y = canvas.height;
+    ballDirectionY = -1;
+    ballDirectionX = 1;
+    cancelAnimationFrame(animationId);
+    animateBall();
 };
+//     const startX = canvas.width / 2;
+//     const startY = canvas.height;
+//     const endX = targetX;
+//     const endY = 0;
+//     const duration = 1000;
+//     const startTime = Date.now();
+
+//     const animate = () => {
+//         const currentTime = Date.now();
+//         const elapsedTime = currentTime - startTime;
+//         const t = Math.min(elapsedTime / duration, 1);
+
+//         const x = startX + (endX - startX) * t;
+//         const y = startY + (endY - startY) * t;
+
+//         ctx.clearRect(0, 0, canvas.width, canvas.height);
+//         ctx.beginPath();
+//         ctx.arc(x, y, 10, 0, Math.PI * 2);
+//         ctx.fillStyle = 'black';
+//         ctx.fill();
+
+//         if (t < 1) {
+//             requestAnimationFrame(animate);
+//         }
+//     };
+
+//     canvas.width = window.innerWidth;
+//     canvas.height = window.innerHeight;
+//     ctx.clearRect(0, 0, canvas.width, canvas.height);
+//     animate();
+// };
 
 // const triggerBallAnimation = () => {
 //     const ball = document.getElementById('ball');
