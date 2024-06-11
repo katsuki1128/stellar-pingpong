@@ -59,7 +59,7 @@ div {
 
 .fukuoka-marker {
     position: absolute;
-    top: 200px; /* 画像の下 */
+    top: 110px; /* 画像の下 */
     left: 80%; /* デフォルト位置 */
     transform: translateX(-50%);
     font-size: 14px; /* 必要に応じてサイズを調整 */
