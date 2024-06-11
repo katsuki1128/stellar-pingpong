@@ -58,15 +58,17 @@
         </ul> -->
     </div>
 
-    <div class="button-container">
-        <button id="motionRequestButton" onClick="deviceMotionRequest()">加速度センサー有効</button>
-        <button id="triggerButton" onClick="triggerBallAnimation()" style="display: none;">ボールを発射</button>
-    </div>
+
     <div class="sensor-data">
+        <div id="message"></div>
         X: <span id="x">0</span><br>
         Y: <span id="y">0</span><br>
         Z: <span id="z">0</span>
-        <div id="message"></div>
+
+    </div>
+    <div class="button-container">
+        <button id="motionRequestButton" onClick="deviceMotionRequest()">加速度センサー有効</button>
+        <button id="triggerButton" onClick="triggerBallAnimation()" style="display: none;">ボールを発射</button>
     </div>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <!-- <div>
