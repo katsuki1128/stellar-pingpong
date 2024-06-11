@@ -17,13 +17,13 @@
     </h1>
 
 
-    <div id="slider-container">
-        <!-- スライダー -->
-        <label for="time-range">表示範囲 (時間):</label>
+    <!-- <div id="slider-container"> -->
+    <!-- スライダー -->
+    <!-- <label for="time-range">表示範囲 (時間):</label>
         <input type="range" id="time-range" name="time-range" min="6" max="20" value="20"
             oninput="updateRangeValue(this.value)">
         <span id="range-value">20</span>時間
-    </div>
+    </div> -->
 
     <div class="satellite-container">
         <!-- みちびき衛星の画像 -->
@@ -37,9 +37,6 @@
         {% endfor %}
     </div>
 
-    <div id="ball">⚫︎</div>
-    <canvas id="animationCanvas"></canvas>
-
     <div class="fukuoka-marker">
         ▲福岡
     </div>
@@ -47,6 +44,10 @@
         <script type="application/json" id="events-data">
             {{ events_info | tojson }}
         </script>
+
+        <div id="ball">⚫︎</div>
+        <canvas id="animationCanvas"></canvas>
+
         <!-- <ul>
             {% for event in events_info %}
             <li>
@@ -57,18 +58,20 @@
         </ul> -->
     </div>
 
-    <div>
-        <button onClick="deviceMotionRequest()">加速度センサーを有効にする</button>
+    <div class="button-container">
+        <button id="motionRequestButton" onClick="deviceMotionRequest()">加速度センサー有効</button>
+        <button id="triggerButton" onClick="triggerBallAnimation()" style="display: none;">ボールを発射</button>
     </div>
     <div class="sensor-data">
         X: <span id="x">0</span><br>
         Y: <span id="y">0</span><br>
         Z: <span id="z">0</span>
+        <div id="message"></div>
     </div>
-
-    <div id="message"></div>
-
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <!-- <div>
+        <button onClick="deviceMotionRequest()">加速度センサー有効</button>
+    </div> -->
 </body>
 
 </html>

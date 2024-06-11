@@ -88,7 +88,7 @@ const deviceMotionRequest = () => {
                         const accelerationMagnitude = Math.sqrt(x * x + y * y + z * z);
 
                         if (accelerationMagnitude > threshold) {
-                            document.getElementById('message').textContent = "ラケットが振られました";
+                            document.getElementById('message').textContent = "⚫︎";
                             triggerBallAnimation();
                         } else {
                             document.getElementById('message').textContent = "";
@@ -101,7 +101,11 @@ const deviceMotionRequest = () => {
             })
             .catch(console.error);
     } else {
-        alert('DeviceMotionEvent.requestPermission is not found');
+        // alert('DeviceMotionEvent.requestPermission is not found');
+        // if (!('ontouchstart' in window)) {
+        console.log("ontouchstart")
+        document.getElementById('triggerButton').style.display = 'block';
+        // }
     }
 };
 
@@ -170,6 +174,9 @@ const triggerBallAnimation = () => {
     cancelAnimationFrame(animationId);
     animateBall();
 };
+
+// PCブラウザの場合はボール発射ボタンを表示
+
 //     const startX = canvas.width / 2;
 //     const startY = canvas.height;
 //     const endX = targetX;
