@@ -132,6 +132,20 @@ const triggerBallAnimation = () => {
     let animationId;
     const drawBall = () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // 衛星のバウンディングボックスを描画
+        satellites.forEach(satellite => {
+            const rect = satellite.getBoundingClientRect();
+            const satelliteLeft = rect.left + window.scrollX;
+            const satelliteRight = rect.right + window.scrollX;
+            const satelliteTop = rect.top + window.scrollY;
+            const satelliteBottom = rect.bottom + window.scrollY;
+            ctx.beginPath();
+            ctx.rect(satelliteLeft, satelliteTop, rect.width, rect.height);
+            ctx.strokeStyle = 'red';
+            ctx.stroke();
+        });
+
         ctx.beginPath();
         ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
         ctx.fillStyle = "#000";
